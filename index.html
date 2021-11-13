@@ -1,0 +1,68 @@
+<script>
+
+function daGradiASegno(gradi) {
+  var g = parseInt(gradi/30) + 1;
+  switch(g){
+    case 1: return 'Ariete';
+    case 2: return 'Toro';
+    case 3: return 'Gemelli';
+    case 4: return 'Cancro';
+    case 5: return 'Leone';
+    case 6: return 'Vergine';
+    case 7: return 'Bilancia';
+    case 8: return 'Scorpione';
+    case 9: return 'Sagittario';
+    case 10: return 'Capricorno';
+    case 11: return 'Acquario';
+    case 12: return 'Pesci';
+  }
+}
+
+function calcola(){
+  var segno = parseInt(document.getElementById("segno").value);
+  var gradi = parseInt(document.getElementById("gradi").value);
+  var primi = parseInt(document.getElementById("primi").value);
+
+  gradi += primi/60;
+  console.log(gradi);
+
+  var r = ((segno-1)*30 + gradi*13) % 360;
+  console.log(r);
+  var rGradiFloat = r-parseInt(r/30)*30;
+  var rGradi = parseInt(rGradiFloat);
+  console.log(rGradiFloat);
+  var rPrimi = parseInt((rGradiFloat-parseInt(rGradiFloat))*60);
+
+  document.getElementById('risultato').innerHTML =
+    daGradiASegno(r) +" "+ rGradi +"°"+ rPrimi +"'"
+  ;
+}
+</script>
+
+<label for="segno">Segno:</label>
+
+<select name="segno" id="segno">
+  <option value="1">Ariete</option>
+  <option value="2">Toro</option>
+  <option value="3">Gemelli</option>
+  <option value="4">Cancro</option>
+  <option value="5">Leone</option>
+  <option value="6">Vergine</option>
+  <option value="7">Bilancia</option>
+  <option value="8">Scorpione</option>
+  <option value="9">Sagittario</option>
+  <option value="10">Capricorno</option>
+  <option value="11">Acquario</option>
+  <option value="12">Pesci</option>
+</select>
+
+<label for="gradi">Gradi</label>
+<input type="number" id="gradi" name="gradi" min="0" max="29" value="0">
+
+<label for="gradi">Primi</label>
+<input type="number" id="primi" name="primi" min="0" max="29" value="0">
+
+<button onclick="calcola()">Calcola</button>
+
+<div id="risultato">
+</div>
